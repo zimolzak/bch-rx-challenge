@@ -1,2 +1,6 @@
 perl -ne 'print if s/.*(\|G [A-Z]*).*/$1/' fixed_drug_details.csv
 |sort |uniq -c |sort -nr |more
+
+
+perl -ne '$y = ($_ =~ tr/,/,/); print "$y\n"' Medication_History_Records.csv |sort | uniq -c
+
