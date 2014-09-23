@@ -77,3 +77,23 @@ input
 ;
 if _ERROR_ then call symputx('_EFIERR_',1); 
 run;
+
+proc univariate data=drug_details;
+	var rowid daysupply fillnumber filldate quantityvalue refillquantity datewritten;
+run;
+
+proc freq data=drug_details; *strictly integer;
+	tables rowid daysupply fillnumber refillquantity;
+run;
+
+proc sgplot data=drug_details;	density filldate / type=kernel; run;
+
+proc sgplot data=drug_details;	density rowid / type=kernel; run;
+proc sgplot data=drug_details;	density daysupply / type=kernel; xaxis max=200; run;
+proc sgplot data=drug_details;	density fillnumber / type=kernel; xaxis max=15; run;
+proc sgplot data=drug_details(where=(quantityvalue < 120));	density quantityvalue / type=kernel; xaxis min=0 max=120; run;
+proc sgplot data=drug_details;	density refillquantity / type=kernel; xaxis max=12; run;
+proc sgplot data=drug_details;	density datewritten / type=kernel; run;
+
+****non numeric;
+
