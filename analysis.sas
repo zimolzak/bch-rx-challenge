@@ -24,7 +24,7 @@ infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' delimiter = '|' MI
    informat DrugDescription $29. ;
    informat DaySupply best32. ;
    informat Directions $63. ;
-   informat DrugCodedProductCode best32. ;
+   informat DrugCodedProductCode $32. ;
    informat DrugCodedProductCodeQualifier $2. ;
    informat DrugCodedStrength $1. ;
    informat FillNumber best32. ;
@@ -42,7 +42,7 @@ infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' delimiter = '|' MI
    format DrugDescription $29. ;
    format DaySupply best12. ;
    format Directions $63. ;
-   format DrugCodedProductCode best12. ;
+   format DrugCodedProductCode $32. ;
    format DrugCodedProductCodeQualifier $2. ;
    format DrugCodedStrength $1. ;
    format FillNumber best12. ;
@@ -61,7 +61,7 @@ input
             DrugDescription $
             DaySupply
             Directions $
-            DrugCodedProductCode
+            DrugCodedProductCode $
             DrugCodedProductCodeQualifier $
             DrugCodedStrength $
             FillNumber
