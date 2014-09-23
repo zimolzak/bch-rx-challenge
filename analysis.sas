@@ -1,20 +1,7 @@
 OPTIONS FORMCHAR="|----|+|---+=|-/\<>*";
-
 ods html close;
 ods listing;
-
 x "cd C:\Users\ch151634\Desktop\surescripts_code";
-
-PROC IMPORT OUT= WORK.DRUG_DETAILS 
-            DATAFILE= "C:\Users\ch151634\Desktop\surescripts_code\fixed.
-csv" 
-            DBMS=DLM REPLACE;
-     DELIMITER='7C'x; 
-     GETNAMES=YES;
-     DATAROW=2; 
-RUN;
-
-
 
 data WORK.DRUG_DETAILS    ;
 %let _EFIERR_ = 0;
@@ -87,7 +74,6 @@ proc freq data=drug_details; *strictly integer;
 run;
 
 proc sgplot data=drug_details;	density filldate / type=kernel; run;
-
 proc sgplot data=drug_details;	density rowid / type=kernel; run;
 proc sgplot data=drug_details;	density daysupply / type=kernel; xaxis max=200; run;
 proc sgplot data=drug_details;	density fillnumber / type=kernel; xaxis max=15; run;
@@ -97,3 +83,10 @@ proc sgplot data=drug_details;	density datewritten / type=kernel; run;
 
 ****non numeric;
 
+proc freq data=drug_details;
+	tables drugcodedproductcodequalifier quantityqualifier refillqualifier;
+run;
+
+proc freq data=drug_details;
+	tables refillqualifier * refillquantity / missing;
+run;
