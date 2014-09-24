@@ -1,0 +1,735 @@
+NOTE: Copyright (c) 2002-2010 by SAS Institute Inc., Cary, NC, USA.
+NOTE: SAS (r) Proprietary Software 9.3 (TS1M0)
+      Licensed to THE CHILDRENS HOSPITAL, Site 70113334.
+NOTE: This session is executing on the X64_7PRO  platform.
+
+
+
+NOTE: SAS initialization used:
+      real time           2.19 seconds
+      cpu time            0.62 seconds
+
+1    OPTIONS FORMCHAR="|----|+|---+=|-/\<>*";
+2
+3    ods html close;
+4    ods listing;
+5
+6    x "cd C:\Users\ch151634\Desktop\surescripts_code"
+6  !                                                  ;
+
+Name
+messageid|rowid|DrugDescription|DaySupply|Directions|DrugCodedProductCode|DrugCodedProduc
+tCodeQualifier|DrugCodedStrength|FillNumber|FillDate|Quantity|QuantityQualifier|QuantityV
+alue|Refills|RefillQua
+truncated to messageid_rowid_DrugDescription_.
+Problems were detected with provided names.  See LOG.
+7     /**********************************************************************
+8     *   PRODUCT:   SAS
+9     *   VERSION:   9.3
+10    *   CREATOR:   External File Interface
+11    *   DATE:      23SEP14
+12    *   DESC:      Generated SAS Datastep Code
+13    *   TEMPLATE SOURCE:  (None Specified.)
+14    ***********************************************************************/
+15       data WORK.drug_details    ;
+16       %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+17       infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' delimiter = ','
+17 ! MISSOVER DSD lrecl=32767 firstobs=2 ;
+18          informat messageid_rowid_DrugDescription_ $198. ;
+19          format messageid_rowid_DrugDescription_ $198. ;
+20       input
+21                   messageid_rowid_DrugDescription_ $
+22       ;
+23       if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro
+23 ! variable */
+24       run;
+
+NOTE: The infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' is:
+      Filename=C:\Users\ch151634\Desktop\surescripts_code\fixed.csv,
+      RECFM=V,LRECL=32767,
+      File Size (bytes)=161039523,
+      Last Modified=23Sep2014:17:01:42,
+      Create Time=23Sep2014:17:01:24
+
+NOTE: 1000000 records were read from the infile
+      'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv'.
+      The minimum record length was 93.
+      The maximum record length was 279.
+NOTE: The data set WORK.DRUG_DETAILS has 1000000 observations and 1 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.02 seconds
+      cpu time            0.98 seconds
+
+
+1000000 rows created in WORK.drug_details from
+C:\Users\ch151634\Desktop\surescripts_code\fixed.csv.
+
+
+
+NOTE: WORK.DRUG_DETAILS data set was successfully created.
+NOTE: The data set WORK.DRUG_DETAILS has 1000000 observations and 1 variables.
+25    /**********************************************************************
+26    *   PRODUCT:   SAS
+27    *   VERSION:   9.3
+28    *   CREATOR:   External File Interface
+29    *   DATE:      23SEP14
+30    *   DESC:      Generated SAS Datastep Code
+31    *   TEMPLATE SOURCE:  (None Specified.)
+32    ***********************************************************************/
+33       data WORK.DRUG_DETAILS    ;
+34       %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+35       infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' delimiter = '|'
+35 ! MISSOVER DSD lrecl=32767 firstobs=2 ;
+36          informat messageid $40. ;
+37          informat rowid best32. ;
+38          informat DrugDescription $29. ;
+39          informat DaySupply best32. ;
+40          informat Directions $63. ;
+41          informat DrugCodedProductCode best32. ;
+42          informat DrugCodedProductCodeQualifier $2. ;
+43          informat DrugCodedStrength $1. ;
+44          informat FillNumber best32. ;
+45          informat FillDate yymmdd10. ;
+46          informat Quantity $1. ;
+47          informat QuantityQualifier $2. ;
+48          informat QuantityValue best32. ;
+49          informat Refills $1. ;
+50          informat RefillQualifier $1. ;
+51          informat RefillQuantity best32. ;
+52          informat DateWritten yymmdd10. ;
+53          informat NPI $1. ;
+54          format messageid $40. ;
+55          format rowid best12. ;
+56          format DrugDescription $29. ;
+57          format DaySupply best12. ;
+58          format Directions $63. ;
+59          format DrugCodedProductCode best12. ;
+60          format DrugCodedProductCodeQualifier $2. ;
+61          format DrugCodedStrength $1. ;
+62          format FillNumber best12. ;
+63          format FillDate yymmdd10. ;
+64          format Quantity $1. ;
+65          format QuantityQualifier $2. ;
+66          format QuantityValue best12. ;
+67          format Refills $1. ;
+68          format RefillQualifier $1. ;
+69          format RefillQuantity best12. ;
+70          format DateWritten yymmdd10. ;
+71          format NPI $1. ;
+72       input
+73                   messageid $
+74                   rowid
+75                   DrugDescription $
+76                   DaySupply
+77                   Directions $
+78                   DrugCodedProductCode
+79                   DrugCodedProductCodeQualifier $
+80                   DrugCodedStrength $
+81                   FillNumber
+82                   FillDate
+83                   Quantity $
+84                   QuantityQualifier $
+85                   QuantityValue
+86                   Refills $
+87                   RefillQualifier $
+88                   RefillQuantity
+89                   DateWritten
+90                   NPI $
+91       ;
+92       if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro
+92 ! variable */
+93       run;
+
+NOTE: The infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' is:
+      Filename=C:\Users\ch151634\Desktop\surescripts_code\fixed.csv,
+      RECFM=V,LRECL=32767,
+      File Size (bytes)=161039523,
+      Last Modified=23Sep2014:17:01:42,
+      Create Time=23Sep2014:17:01:24
+
+NOTE: Invalid data for DrugCodedProductCode in line 98347 59-61.
+RULE:     ----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----
+98347     2fe917aeb34848b7973e8628f0ef8012affff6f2|30|COMPOUND|016||N/A|ND||00|2013-01-22
+      80  ||ZZ|240.000||R|0|2012-12-27| 108
+messageid=2fe917aeb34848b7973e8628f0ef8012affff6f2 rowid=30 DrugDescription=COMPOUND
+DaySupply=16 Directions=  DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND
+DrugCodedStrength=  FillNumber=0 FillDate=2013-01-22 Quantity=  QuantityQualifier=ZZ
+QuantityValue=240 Refills=  RefillQualifier=R RefillQuantity=0 DateWritten=2012-12-27
+NPI=  _ERROR_=1 _N_=98346
+NOTE: Invalid data for DrugCodedProductCode in line 98350 114-116.
+98350     2fe917aeb34848b7973e8628f0ef8012affff6f2|33|COMPOUND|016|take 1 teaspoonful by
+      80  mouth three times a day if needed|N/A|ND||00|2012-12-27||ZZ|240.000||R|0|2012-1
+     159  2-27| 163
+messageid=2fe917aeb34848b7973e8628f0ef8012affff6f2 rowid=33 DrugDescription=COMPOUND
+DaySupply=16 Directions=take 1 teaspoonful by mouth three times a day if needed
+DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0
+FillDate=2012-12-27 Quantity=  QuantityQualifier=ZZ QuantityValue=240 Refills=
+RefillQualifier=R RefillQuantity=0 DateWritten=2012-12-27 NPI=  _ERROR_=1 _N_=98349
+NOTE: Invalid data for DrugCodedProductCode in line 151447 59-61.
+151447    0ec2bcc232855c825aae83862bebfdd87b347feb|34|COMPOUND|030||N/A|ND||00|2013-01-18
+      80  ||ZZ|180.000||R|0|2013-01-14| 108
+messageid=0ec2bcc232855c825aae83862bebfdd87b347feb rowid=34 DrugDescription=COMPOUND
+DaySupply=30 Directions=  DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND
+DrugCodedStrength=  FillNumber=0 FillDate=2013-01-18 Quantity=  QuantityQualifier=ZZ
+QuantityValue=180 Refills=  RefillQualifier=R RefillQuantity=0 DateWritten=2013-01-14
+NPI=  _ERROR_=1 _N_=151446
+NOTE: Invalid data for DrugCodedProductCode in line 151449 91-93.
+151449    0ec2bcc232855c825aae83862bebfdd87b347feb|36|COMPOUND|030|TAKE 10 ML AS DIRECTED
+      80   IF NEEDED|N/A|ND||00|2013-01-14||ZZ|180.000||R|0|2013-01-14| 140
+messageid=0ec2bcc232855c825aae83862bebfdd87b347feb rowid=36 DrugDescription=COMPOUND
+DaySupply=30 Directions=TAKE 10 ML AS DIRECTED IF NEEDED DrugCodedProductCode=.
+DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0 FillDate=2013-01-14
+Quantity=  QuantityQualifier=ZZ QuantityValue=180 Refills=  RefillQualifier=R
+RefillQuantity=0 DateWritten=2013-01-14 NPI=  _ERROR_=1 _N_=151448
+NOTE: Invalid data for DrugCodedProductCode in line 156286 136-138.
+156286    178b97a397fc059d779d5a94f657e98e59b28cf3|51|COMPOUND|004|TAKE 1 TO 2 TEASPOONFU
+      80  L BY MOUTH EVERY 4 TO 6 HOURS AS NEEDED FOR MOUTH SORES|N/A|ND||00|2012-11-14||
+     159  ZZ|240.000||R|0|2012-11-13| 185
+messageid=178b97a397fc059d779d5a94f657e98e59b28cf3 rowid=51 DrugDescription=COMPOUND
+DaySupply=4 Directions=TAKE 1 TO 2 TEASPOONFUL BY MOUTH EVERY 4 TO 6 HOURS AS NEEDED F
+DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0
+FillDate=2012-11-14 Quantity=  QuantityQualifier=ZZ QuantityValue=240 Refills=
+RefillQualifier=R RefillQuantity=0 DateWritten=2012-11-13 NPI=  _ERROR_=1 _N_=156285
+NOTE: Invalid data for DrugCodedProductCode in line 156341 147-149.
+156341    2b9b20d6774d1c2b16f98661ccf6c3e2792edf4b|54|COMPOUND|002|SWISH 5 MLS BY MOUTH F
+      80  OR 5 MINUTES AND SPIT AS NEEDED FOR PAIN,REPEAT EVERY 1 TO 4 HOURS|N/A|ND||00|2
+     159  012-11-19||ZZ|120.000||R|0|2012-11-19| 196
+messageid=2b9b20d6774d1c2b16f98661ccf6c3e2792edf4b rowid=54 DrugDescription=COMPOUND
+DaySupply=2 Directions=SWISH 5 MLS BY MOUTH FOR 5 MINUTES AND SPIT AS NEEDED FOR PAIN,
+DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0
+FillDate=2012-11-19 Quantity=  QuantityQualifier=ZZ QuantityValue=120 Refills=
+RefillQualifier=R RefillQuantity=0 DateWritten=2012-11-19 NPI=  _ERROR_=1 _N_=156340
+NOTE: Invalid data for DrugCodedProductCode in line 265331 123-125.
+265331    2e3d380eec433dae32b4f6b9586bdd0362772714|1|COMPOUND|004|swish and swallow 3 tea
+      80  spoonfuls by mouth every 4 hours if needed|N/A|ND||00|2012-12-13||ZZ|360.000||R
+RULE:     ----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----
+     159  |0|2012-12-13| 172
+messageid=2e3d380eec433dae32b4f6b9586bdd0362772714 rowid=1 DrugDescription=COMPOUND
+DaySupply=4 Directions=swish and swallow 3 teaspoonfuls by mouth every 4 hours if need
+DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0
+FillDate=2012-12-13 Quantity=  QuantityQualifier=ZZ QuantityValue=360 Refills=
+RefillQualifier=R RefillQuantity=0 DateWritten=2012-12-13 NPI=  _ERROR_=1 _N_=265330
+NOTE: Invalid data for DrugCodedProductCode in line 494571 59-61.
+494571    02f76cc2aaf2f55d73fd42d9db762efff92f89aa|72|COMPOUND|030||N/A|ND||00|2013-01-01
+      80  ||ZZ|90.000||R|0|2012-12-05| 107
+messageid=02f76cc2aaf2f55d73fd42d9db762efff92f89aa rowid=72 DrugDescription=COMPOUND
+DaySupply=30 Directions=  DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND
+DrugCodedStrength=  FillNumber=0 FillDate=2013-01-01 Quantity=  QuantityQualifier=ZZ
+QuantityValue=90 Refills=  RefillQualifier=R RefillQuantity=0 DateWritten=2012-12-05
+NPI=  _ERROR_=1 _N_=494570
+NOTE: Invalid data for DrugCodedProductCode in line 494575 100-102.
+494575    02f76cc2aaf2f55d73fd42d9db762efff92f89aa|76|COMPOUND|030|take 3 milliliters by
+      80  mouth every evening|N/A|ND||00|2012-12-05||ZZ|90.000||R|0|2012-12-05| 148
+messageid=02f76cc2aaf2f55d73fd42d9db762efff92f89aa rowid=76 DrugDescription=COMPOUND
+DaySupply=30 Directions=take 3 milliliters by mouth every evening DrugCodedProductCode=.
+DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0 FillDate=2012-12-05
+Quantity=  QuantityQualifier=ZZ QuantityValue=90 Refills=  RefillQualifier=R
+RefillQuantity=0 DateWritten=2012-12-05 NPI=  _ERROR_=1 _N_=494574
+NOTE: Invalid data for DrugCodedProductCode in line 498562 116-118.
+498562    3183f6e4788161686ba99a5fefa56feeefd16e34|40|COMPOUND|010|apply topically twice
+      80  a day A THIN LAYER to affected area|N/A|ND||00|2012-12-26||ZZ|200.000||R|0|2012
+     159  -12-26| 165
+messageid=3183f6e4788161686ba99a5fefa56feeefd16e34 rowid=40 DrugDescription=COMPOUND
+DaySupply=10 Directions=apply topically twice a day A THIN LAYER to affected area
+DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0
+FillDate=2012-12-26 Quantity=  QuantityQualifier=ZZ QuantityValue=200 Refills=
+RefillQualifier=R RefillQuantity=0 DateWritten=2012-12-26 NPI=  _ERROR_=1 _N_=498561
+NOTE: Invalid data for DrugCodedProductCode in line 498568 59-61.
+498568    3183f6e4788161686ba99a5fefa56feeefd16e34|46|COMPOUND|010||N/A|ND||00|2012-11-23
+      80  ||ZZ|200.000||R|0|2012-10-22| 108
+messageid=3183f6e4788161686ba99a5fefa56feeefd16e34 rowid=46 DrugDescription=COMPOUND
+DaySupply=10 Directions=  DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND
+DrugCodedStrength=  FillNumber=0 FillDate=2012-11-23 Quantity=  QuantityQualifier=ZZ
+QuantityValue=200 Refills=  RefillQualifier=R RefillQuantity=0 DateWritten=2012-10-22
+NPI=  _ERROR_=1 _N_=498567
+NOTE: Invalid data for DrugCodedProductCode in line 663072 59-61.
+663072    16626a8a9653d400d4989f9b8a9a776707d16794|43|COMPOUND|020||N/A|ND||00|2012-12-13
+      80  ||ZZ|800.000||R|0|2012-09-19| 108
+messageid=16626a8a9653d400d4989f9b8a9a776707d16794 rowid=43 DrugDescription=COMPOUND
+DaySupply=20 Directions=  DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND
+DrugCodedStrength=  FillNumber=0 FillDate=2012-12-13 Quantity=  QuantityQualifier=ZZ
+QuantityValue=800 Refills=  RefillQualifier=R RefillQuantity=0 DateWritten=2012-09-19
+NPI=  _ERROR_=1 _N_=663071
+NOTE: Invalid data for DrugCodedProductCode in line 839087 103-105.
+839087    07c0d51737af1a40f7ff27fc74158777c6e604ea|6|COMPOUND|010|give 12.5 MLS by mouth
+      80  twice a day for 5 days|N/A|ND||00|2013-01-03||ZZ|125.000||R|0|2013-01-03| 152
+messageid=07c0d51737af1a40f7ff27fc74158777c6e604ea rowid=6 DrugDescription=COMPOUND
+DaySupply=10 Directions=give 12.5 MLS by mouth twice a day for 5 days
+DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0
+FillDate=2013-01-03 Quantity=  QuantityQualifier=ZZ QuantityValue=125 Refills=
+RefillQualifier=R RefillQuantity=0 DateWritten=2013-01-03 NPI=  _ERROR_=1 _N_=839086
+NOTE: Invalid data for DrugCodedProductCode in line 914870 110-112.
+914870    204d52ebe6ded84d643865064c382f740c0073b1|3|COMPOUND|009|give 5 milliliters by m
+      80  outh every 6 hours for 5 days|N/A|ND||00|2013-01-08||ZZ|180.000||R|0|2013-01-08
+     159  | 159
+messageid=204d52ebe6ded84d643865064c382f740c0073b1 rowid=3 DrugDescription=COMPOUND
+DaySupply=9 Directions=give 5 milliliters by mouth every 6 hours for 5 days
+DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0
+FillDate=2013-01-08 Quantity=  QuantityQualifier=ZZ QuantityValue=180 Refills=
+RefillQualifier=R RefillQuantity=0 DateWritten=2013-01-08 NPI=  _ERROR_=1 _N_=914869
+NOTE: Invalid data for DrugCodedProductCode in line 941561 135-137.
+941561    1776eaec2b3fa783f3efa3a01155a8c040eae1be|22|COMPOUND|002|SWISH GARGLE AND SPIT
+      80  1 TABLESPOONFUL EVERY 2 HOURS AS NEEDED FOR MOUTH PAIN|N/A|ND||00|2013-01-13||Z
+     159  Z|180.000||R|0|2013-01-13| 184
+messageid=1776eaec2b3fa783f3efa3a01155a8c040eae1be rowid=22 DrugDescription=COMPOUND
+DaySupply=2 Directions=SWISH GARGLE AND SPIT 1 TABLESPOONFUL EVERY 2 HOURS AS NEEDED F
+DrugCodedProductCode=. DrugCodedProductCodeQualifier=ND DrugCodedStrength=  FillNumber=0
+FillDate=2013-01-13 Quantity=  QuantityQualifier=ZZ QuantityValue=180 Refills=
+RefillQualifier=R RefillQuantity=0 DateWritten=2013-01-13 NPI=  _ERROR_=1 _N_=941560
+NOTE: 1000000 records were read from the infile
+      'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv'.
+      The minimum record length was 93.
+      The maximum record length was 279.
+NOTE: The data set WORK.DRUG_DETAILS has 1000000 observations and 18 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.01 seconds
+      cpu time            1.96 seconds
+
+
+Errors detected in submitted DATA step. Examine log.
+1000000 rows created in WORK.DRUG_DETAILS from
+C:\Users\ch151634\Desktop\surescripts_code\fixed.csv.
+
+
+
+ERROR: Import unsuccessful.  See SAS Log for details.
+94
+95   data WORK.DRUG_DETAILS    ;
+96   %let _EFIERR_ = 0;
+97   infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' delimiter = '|'
+97 ! MISSOVER DSD lrecl=32767 firstobs=2 ;
+98      informat messageid $40. ;
+99      informat rowid best32. ;
+100     informat DrugDescription $29. ;
+101     informat DaySupply best32. ;
+102     informat Directions $63. ;
+103     informat DrugCodedProductCode $32. ;
+104     informat DrugCodedProductCodeQualifier $2. ;
+105     informat DrugCodedStrength $1. ;
+106     informat FillNumber best32. ;
+107     informat FillDate yymmdd10. ;
+108     informat Quantity $1. ;
+109     informat QuantityQualifier $2. ;
+110     informat QuantityValue best32. ;
+111     informat Refills $1. ;
+112     informat RefillQualifier $1. ;
+113     informat RefillQuantity best32. ;
+114     informat DateWritten yymmdd10. ;
+115     informat NPI $1. ;
+116     format messageid $40. ;
+117     format rowid best12. ;
+118     format DrugDescription $29. ;
+119     format DaySupply best12. ;
+120     format Directions $63. ;
+121     format DrugCodedProductCode $32. ;
+122     format DrugCodedProductCodeQualifier $2. ;
+123     format DrugCodedStrength $1. ;
+124     format FillNumber best12. ;
+125     format FillDate yymmdd10. ;
+126     format Quantity $1. ;
+127     format QuantityQualifier $2. ;
+128     format QuantityValue best12. ;
+129     format Refills $1. ;
+130     format RefillQualifier $1. ;
+131     format RefillQuantity best12. ;
+132     format DateWritten yymmdd10. ;
+133     format NPI $1. ;
+134  input
+135              messageid $
+136              rowid
+137              DrugDescription $
+138              DaySupply
+139              Directions $
+140              DrugCodedProductCode $
+141              DrugCodedProductCodeQualifier $
+142              DrugCodedStrength $
+143              FillNumber
+144              FillDate
+145              Quantity $
+146              QuantityQualifier $
+147              QuantityValue
+148              Refills $
+149              RefillQualifier $
+150              RefillQuantity
+151              DateWritten
+152              NPI $
+153  ;
+154  if _ERROR_ then call symputx('_EFIERR_',1);
+155  run;
+
+NOTE: The infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' is:
+      Filename=C:\Users\ch151634\Desktop\surescripts_code\fixed.csv,
+      RECFM=V,LRECL=32767,
+      File Size (bytes)=161039523,
+      Last Modified=23Sep2014:17:01:42,
+      Create Time=23Sep2014:17:01:24
+
+NOTE: 1000000 records were read from the infile
+      'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv'.
+      The minimum record length was 93.
+      The maximum record length was 279.
+NOTE: The data set WORK.DRUG_DETAILS has 1000000 observations and 18 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.96 seconds
+      cpu time            1.96 seconds
+
+
+156
+157
+158
+159  data WORK.DRUG_DETAILS    ;
+160  %let _EFIERR_ = 0;
+161  infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' delimiter = '|'
+161! MISSOVER DSD lrecl=32767 firstobs=2 ;
+162     informat messageid $40. ;
+163     informat rowid best32. ;
+164     informat DrugDescription $29. ;
+165     informat DaySupply best32. ;
+166     informat Directions $63. ;
+167     informat DrugCodedProductCode $32. ;
+168     informat DrugCodedProductCodeQualifier $2. ;
+169     informat DrugCodedStrength $20. ;
+170     informat FillNumber best32. ;
+171     informat FillDate yymmdd10. ;
+172     informat Quantity best32. ;
+173     informat QuantityQualifier $2. ;
+174     informat QuantityValue best32. ;
+175     informat Refills $1. ;
+176     informat RefillQualifier $1. ;
+177     informat RefillQuantity best32. ;
+178     informat DateWritten yymmdd10. ;
+179     informat NPI $40. ;
+180     format messageid $40. ;
+181     format rowid best12. ;
+182     format DrugDescription $29. ;
+183     format DaySupply best12. ;
+184     format Directions $63. ;
+185     format DrugCodedProductCode $32. ;
+186     format DrugCodedProductCodeQualifier $2. ;
+187     format DrugCodedStrength $20. ;
+188     format FillNumber best12. ;
+189     format FillDate yymmdd10. ;
+190     format Quantity best32. ;
+191     format QuantityQualifier $2. ;
+192     format QuantityValue best12. ;
+193     format Refills $1. ;
+194     format RefillQualifier $1. ;
+195     format RefillQuantity best12. ;
+196     format DateWritten yymmdd10. ;
+197     format NPI $40. ;
+198  input
+199              messageid $
+200              rowid
+201              DrugDescription $
+202              DaySupply
+203              Directions $
+204              DrugCodedProductCode $
+205              DrugCodedProductCodeQualifier $
+206              DrugCodedStrength $
+207              FillNumber
+208              FillDate
+209              Quantity
+210              QuantityQualifier $
+211              QuantityValue
+212              Refills $
+213              RefillQualifier $
+214              RefillQuantity
+215              DateWritten
+216              NPI $
+217  ;
+218  if _ERROR_ then call symputx('_EFIERR_',1);
+219  run;
+
+NOTE: The infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' is:
+      Filename=C:\Users\ch151634\Desktop\surescripts_code\fixed.csv,
+      RECFM=V,LRECL=32767,
+      File Size (bytes)=161039523,
+      Last Modified=23Sep2014:17:01:42,
+      Create Time=23Sep2014:17:01:24
+
+NOTE: 1000000 records were read from the infile
+      'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv'.
+      The minimum record length was 93.
+      The maximum record length was 279.
+NOTE: The data set WORK.DRUG_DETAILS has 1000000 observations and 18 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.07 seconds
+      cpu time            2.07 seconds
+
+
+220
+221
+222  data WORK.DRUG_DETAILS    ;
+223  %let _EFIERR_ = 0;
+224  infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' delimiter = '|'
+224! MISSOVER DSD lrecl=32767 firstobs=2 ;
+225     informat messageid $40. ;
+226     informat rowid best32. ;
+227     informat DrugDescription $35. ;
+228     informat DaySupply best32. ; *string 3;
+229     informat Directions $140. ;
+230     informat DrugCodedProductCode $32. ;
+231     informat DrugCodedProductCodeQualifier $2. ;
+232     informat DrugCodedStrength $60. ;
+233     informat FillNumber best32. ; *string 2;
+234     informat FillDate yymmdd10. ;
+235     informat Quantity best32. ; *not used;
+236     informat QuantityQualifier $2. ;
+237     informat QuantityValue best32. ; *string 10;
+238     informat Refills $1. ; *not used;
+239     informat RefillQualifier $1. ;
+240     informat RefillQuantity best32. ; *string 2;
+241     informat DateWritten yymmdd10. ;
+242     informat NPI $40. ;
+243     format messageid $40. ;
+244     format rowid best12. ;
+245     format DrugDescription $35. ;
+246     format DaySupply best12. ;
+247     format Directions $140. ;
+248     format DrugCodedProductCode $32. ;
+249     format DrugCodedProductCodeQualifier $2. ;
+250     format DrugCodedStrength $60. ;
+251     format FillNumber best12. ;
+252     format FillDate yymmdd10. ;
+253     format Quantity best32. ;
+254     format QuantityQualifier $2. ;
+255     format QuantityValue best12. ;
+256     format Refills $1. ;
+257     format RefillQualifier $1. ;
+258     format RefillQuantity best12. ;
+259     format DateWritten yymmdd10. ;
+260     format NPI $40. ;
+261  input
+262              messageid $
+263              rowid
+264              DrugDescription $
+265              DaySupply
+266              Directions $
+267              DrugCodedProductCode $
+268              DrugCodedProductCodeQualifier $
+269              DrugCodedStrength $
+270              FillNumber
+271              FillDate
+272              Quantity
+273              QuantityQualifier $
+274              QuantityValue
+275              Refills $
+276              RefillQualifier $
+277              RefillQuantity
+278              DateWritten
+279              NPI $
+280  ;
+281  if _ERROR_ then call symputx('_EFIERR_',1);
+282  run;
+
+NOTE: The infile 'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv' is:
+      Filename=C:\Users\ch151634\Desktop\surescripts_code\fixed.csv,
+      RECFM=V,LRECL=32767,
+      File Size (bytes)=161039523,
+      Last Modified=23Sep2014:17:01:42,
+      Create Time=23Sep2014:17:01:24
+
+NOTE: 1000000 records were read from the infile
+      'C:\Users\ch151634\Desktop\surescripts_code\fixed.csv'.
+      The minimum record length was 93.
+      The maximum record length was 279.
+NOTE: The data set WORK.DRUG_DETAILS has 1000000 observations and 18 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.26 seconds
+      cpu time            2.24 seconds
+
+
+283  proc univariate data=drug_details;
+284      var rowid daysupply fillnumber filldate quantity value refillquantity
+284! datewritten;
+ERROR: Variable VALUE not found.
+285  run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE UNIVARIATE used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+
+
+286
+287  proc univariate data=drug_details;
+288      var rowid daysupply fillnumber filldate quantityvalue refillquantity datewritten
+288! ;
+289  run;
+
+NOTE: PROCEDURE UNIVARIATE used (Total process time):
+      real time           2.23 seconds
+      cpu time            2.16 seconds
+
+
+290
+291  proc freq data=drug_details; *strictly integer;
+292      tables rowid daysupply fillnumber refillquantity;
+293  run;
+
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.34 seconds
+      cpu time            0.31 seconds
+
+
+294
+295  proc sgplot data=drug_details;
+296      density filldate / type=kernel;
+297  run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           1.47 seconds
+      cpu time            0.87 seconds
+
+NOTE: The column format YYMMDD10 is replaced by an auto-generated format on the axis.
+NOTE: Listing image output written to SGPlot.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+298
+299  proc sgplot data=drug_details;  density rowid / type=kernel; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.85 seconds
+      cpu time            0.73 seconds
+
+NOTE: Listing image output written to SGPlot1.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+300  proc sgplot data=drug_details;  density daysupply / type=kernel; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.83 seconds
+      cpu time            0.76 seconds
+
+NOTE: Listing image output written to SGPlot2.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+301  proc sgplot data=drug_details;  density fillnumber / type=kernel; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.85 seconds
+      cpu time            0.79 seconds
+
+NOTE: Listing image output written to SGPlot3.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+302  proc sgplot data=drug_details;  density quantityvalue / type=kernel; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.84 seconds
+      cpu time            0.74 seconds
+
+NOTE: Listing image output written to SGPlot4.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+303  proc sgplot data=drug_details;  density refillquantity / type=kernel; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.83 seconds
+      cpu time            0.71 seconds
+
+NOTE: Listing image output written to SGPlot5.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+304  proc sgplot data=drug_details;  density datewritten / type=kernel; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.86 seconds
+      cpu time            0.79 seconds
+
+NOTE: The column format YYMMDD10 is replaced by an auto-generated format on the axis.
+NOTE: Listing image output written to SGPlot6.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+305  proc sgplot data=drug_details;  density daysupply / type=kernel; xaxis max=200; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.88 seconds
+      cpu time            0.78 seconds
+
+NOTE: Listing image output written to SGPlot7.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+306  proc sgplot data=drug_details;  density fillnumber / type=kernel; xaxis max=15; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.80 seconds
+      cpu time            0.73 seconds
+
+NOTE: Listing image output written to SGPlot8.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+307  proc sgplot data=drug_details;  density refillquantity / type=kernel; xaxis max=12;
+307! run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.82 seconds
+      cpu time            0.74 seconds
+
+NOTE: Listing image output written to SGPlot9.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+308  proc sgplot data=drug_details;  density quantityvalue / type=kernel; xaxis max=120;
+308! run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.85 seconds
+      cpu time            0.78 seconds
+
+NOTE: Listing image output written to SGPlot10.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+309  proc sgplot data=drug_details;  density quantityvalue / type=kernel; xaxis min=0
+309! max=120; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           0.84 seconds
+      cpu time            0.74 seconds
+
+NOTE: Listing image output written to SGPlot11.png.
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+
+310  proc sgplot data=drug_details(where=(quantityvalue < 120)); density quantityvalue /
+310! type=kernel; xaxis min=0 max=120; run;
+
+NOTE: PROCEDURE SGPLOT used (Total process time):
+      real time           1.15 seconds
+      cpu time            1.06 seconds
+
+NOTE: Listing image output written to SGPlot12.png.
+NOTE: There were 913019 observations read from the data set WORK.DRUG_DETAILS.
+      WHERE quantityvalue<120;
+
+311
+312  proc freq data=drug_details;
+313      tables drugcodedproductcodequalifier quantityqualifier refillqualifier;
+314  run;
+
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.24 seconds
+      cpu time            0.24 seconds
+
+
+315  proc freq data=drug_details;
+316      tables refillqualifier * refillquantity;
+317  run;
+
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.25 seconds
+      cpu time            0.23 seconds
+
+
+318
+319  proc freq data=drug_details;
+320      tables refillqualifier * refillquantity / missing;
+321  run;
+
+NOTE: There were 1000000 observations read from the data set WORK.DRUG_DETAILS.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.30 seconds
+      cpu time            0.31 seconds
+
+
