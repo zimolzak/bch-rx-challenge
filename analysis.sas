@@ -1,3 +1,9 @@
+/*
+Import the fixed CSV of Drug_Details. Check basic univariate
+distributions on numeric & categorical vars.
+*/
+
+
 OPTIONS FORMCHAR="|----|+|---+=|-/\<>*";
 ods html close;
 ods listing;
