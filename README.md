@@ -18,3 +18,6 @@ input filename as you like.)
 
 Note: test.txt is just a few lines of the pipe-delimited file, roughly
 aligned with spaces, to make it easy to examine quickly.
+
+Image outputs not for GitHub: https://www.dropbox.com/sh/1rzxfje5j2kji9b/AAB8uHnR9q9l7zdj1EEyNiMza?dl=0
+
