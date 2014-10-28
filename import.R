@@ -16,3 +16,14 @@ qplot(X$RefillQuantity[X$RefillQuantity < 15])
 qplot(X$DateWritten)
 
 # Strictly, just plotting a distribution of QuantityValue conflates mL and pills. So don't do that in real life.
+
+val_vs_qual = ggplot(X[X$QuantityValue < 300,], aes(QuantityQualifier, QuantityValue))
+val_vs_qual + geom_boxplot()
+
+subset = X[X$QuantityValue < 300,][1:10000,]
+val10k = ggplot(subset, aes(x = QuantityValue))
+val10k + geom_density(aes(color=QuantityQualifier))
+
+ggm = rbind(X[X$QuantityQualifier == "GM",], X[X$QuantityQualifier == "GR",], X[X$QuantityQualifier == "ML",])
+valgm = ggplot(ggm[ggm$QuantityValue < 300,], aes(x = QuantityValue))
+valgm + geom_density(aes(color=QuantityQualifier))
