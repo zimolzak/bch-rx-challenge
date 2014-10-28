@@ -1,10 +1,14 @@
-X = read.csv("~/Desktop/local/surescript-code/fixed_drug_details.csv", sep="|", quote="", colClasses=c("character", "integer", "character", "integer", "character", "character", "factor", "character", "numeric", "Date", "numeric", "factor", "numeric", "integer", "factor", "integer", "Date", "character"))
+X = read.csv("~/Desktop/local/surescript-code/fixed_drug_details.csv", sep="|", quote="", colClasses=c("character", "integer", "character", "integer", "character", "character", "factor", "character", "numeric", "Date", "character", "factor", "numeric", "character", "factor", "integer", "Date", "character"))
 
-q = c("x")
-n = dim(X)[2]
-for (i in 1:n) {
-	q = c(q, class(X[1,i]) )
-}
-rbind(names(X), q[2:(n+1)])
+#takes around 90 sec on my laptop
+# Quantity and Refills seem to be unused
 
-#first two ones to look at are Quantity and Refills
+require(ggplot2)
+
+qplot(X$DaySupply[X$DaySupply < 110])
+qplot(X$FillNumber[X$FillNumber < 15])
+qplot(X$FillDate)
+qplot(X$QuantityQualifier)
+qplot(X$QuantityValue[X$QuantityValue < 500])
+qplot(X$RefillQuantity[X$RefillQuantity < 15])
+qplot(X$DateWritten)
