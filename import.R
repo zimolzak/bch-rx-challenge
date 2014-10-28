@@ -11,11 +11,10 @@ qplot(X$DaySupply[X$DaySupply < 110])
 qplot(X$FillNumber[X$FillNumber < 15])
 qplot(X$FillDate)
 qplot(X$QuantityQualifier)
-qplot(X$QuantityValue[X$QuantityValue < 500])
+qplot(X$QuantityValue[X$QuantityValue < 500]) # plotting all QuantityValue conflates mL and pills.
+
 qplot(X$RefillQuantity[X$RefillQuantity < 15])
 qplot(X$DateWritten)
-
-# Strictly, just plotting a distribution of QuantityValue conflates mL and pills. So don't do that in real life.
 
 val_vs_qual = ggplot(X[X$QuantityValue < 300,], aes(QuantityQualifier, QuantityValue))
 val_vs_qual + geom_boxplot()
@@ -27,3 +26,6 @@ val10k + geom_density(aes(color=QuantityQualifier))
 ggm = rbind(X[X$QuantityQualifier == "GM",], X[X$QuantityQualifier == "GR",], X[X$QuantityQualifier == "ML",])
 valgm = ggplot(ggm[ggm$QuantityValue < 300,], aes(x = QuantityValue))
 valgm + geom_density(aes(color=QuantityQualifier))
+
+kruskal.test(QuantityValue ~ QuantityQualifier, data = X)
+ # P < 2.2e-16. Thus proving that milliliters are a different unit from pills. Well, duh.
