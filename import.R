@@ -1,4 +1,6 @@
-X = read.csv("~/Desktop/local/surescript-code/fixed_drug_details.csv", sep="|")
+X = read.csv("~/Desktop/local/surescript-code/fixed_drug_details.csv", sep="|", quote="", colClasses=c("character", "integer", "character", "integer", "character", "character", "factor", "character", "numeric", "Date", "numeric", "factor", "numeric", "integer", "factor", "integer", "Date", "character"))
+
+
 # bad news
 apply(X[1,], 2, class) # all character
 
@@ -6,9 +8,12 @@ q = c("x")
 for (i in 1:18) {
 	q = c(q, class(X[1,i]) )
 }
-q[2:19] # all factor
+rbind(names(X), q[2:19]) # all factor
 
 head(X$DrugCodedProductCodeQualifier) # something is definitely bad
+
+X = read.csv("~/Desktop/local/surescript-code/deleteme.txt", sep="|")
+
 
 X$messageid = as.character(X$messageid)
 X$rowid = as.numeric(as.character(X$rowid))
