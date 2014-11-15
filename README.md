@@ -1,11 +1,24 @@
 BCH Rx Challenge
 ====
 
-Purpose: Analysis of e-prescribing data. Workflow so far fixes some
-problems with commas in the original CSV, and then proceeds with
-analysis.
+Purpose: Analysis of e-prescribing data.
 
-1. Run `./fix.pl Drug_Details.csv > fixed_drug_details.csv`.
+Results
+----
+
+* Plain text outputs at
+  https://github.com/zimolzak/bch-rx-challenge/tree/master/results
+
+* Image outputs at
+  https://www.dropbox.com/sh/1rzxfje5j2kji9b/AAB8uHnR9q9l7zdj1EEyNiMza?dl=0
+
+![rx fill visualization](https://dl.dropboxusercontent.com/u/38640281/github_img/Screen%20Shot%202014-11-15%20at%209.16.46%20AM.png)
+
+Instructions
+----
+
+1. Run `./fix.pl Drug_Details.csv > fixed_drug_details.csv`, to fix
+some problems with commas in the original CSV.
 
 2. Run `comma_distribution.sh` to prove to yourself that
 `Medication_History_Records.csv` doesn't need to be fixed. (First
@@ -30,12 +43,3 @@ continuous vs a categorical variable.
 like finding the most commonly prescribed drugs, delays between rx
 date and fill date, and visualizations of population rx fill dates &
 med supplies.
-
-Results
-----
-
-* Plain text outputs at
-  https://github.com/zimolzak/bch-rx-challenge/tree/master/results
-
-* Image outputs at
-  https://www.dropbox.com/sh/1rzxfje5j2kji9b/AAB8uHnR9q9l7zdj1EEyNiMza?dl=0
