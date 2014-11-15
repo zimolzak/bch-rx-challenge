@@ -17,9 +17,11 @@ length(drug_list) # 16015 NDCs
 
 #####
 
-df_ndc = data.frame(ndc = sorted$DrugCodedProductCode, stringsAsFactors=FALSE)
-ndc_bestsellers = rle(sort(df_ndc$ndc)) # 15 sec
+row.names(sorted) = (1:dim(sorted)[1])
 
+df_ndc = data.frame(ndc = sorted$DrugCodedProductCode, stringsAsFactors=FALSE)
+
+ndc_bestsellers = rle(sort(df_ndc$ndc)) # 15 sec
 ndc_best_df = data.frame(count = unlist(ndc_bestsellers[1]), DrugCodedProductCode = unlist(ndc_bestsellers[2]))
 ndc_best_df = ndc_best_df[order(ndc_best_df$count, decreasing = TRUE),]
 
@@ -27,12 +29,11 @@ ndc_best_df = ndc_best_df[order(ndc_best_df$count, decreasing = TRUE),]
 
 
 uniq_drug_rownames = row.names(unique(df_ndc))
-uniq_drugs = sorted[row.names(u),] # about 45 sec of CPU-intensive
+uniq_drugs = sorted[uniq_drug_rownames,] # about 45 sec of CPU-intensive
 ndc_dict = uniq_drugs[c("DrugDescription", "DrugCodedProductCode")]
 
 bestseller_w_names = merge(x=ndc_dict, y=ndc_best_df, by="DrugCodedProductCode")
 bestseller_w_names = bestseller_w_names[order(bestseller_w_names$count, decreasing=TRUE),]
-bestseller_w_names = unique(bestseller_w_names)
 
 #uniq_drugs = uniq_drugs$DrugDescription
 #uniq_drugs = unique(uniq_drugs)
