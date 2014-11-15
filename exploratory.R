@@ -47,6 +47,7 @@ plot + geom_density() + scale_x_log10()
 delay_all = data.frame(delay = as.numeric(joined$FillDate - joined$DateWritten))
 joined = cbind(joined,delay_all)
 
-qplot(data=head(joined,n=10000), x=DateWritten, y=delay)
+plot2 = ggplot(head(joined,n=10000), aes(x=DateWritten, y=delay))
+plot2 + geom_density2d() + geom_point()  + ylim(0, 150) + xlim(as.Date("2012-07-01"), as.Date("2013-12-31"))
 
 # qplot(data=joined, x=DateWritten, y=delay) # bad idea on 1E6 data points.
