@@ -35,6 +35,8 @@ ndc_dict = uniq_drugs[c("DrugDescription", "DrugCodedProductCode")]
 bestseller_w_names = merge(x=ndc_dict, y=ndc_best_df, by="DrugCodedProductCode")
 bestseller_w_names = bestseller_w_names[order(bestseller_w_names$count, decreasing=TRUE),]
 
+head(bestseller_w_names, n=100)
+
 #uniq_drugs = uniq_drugs$DrugDescription
 #uniq_drugs = unique(uniq_drugs)
 #uniq_drugs = sort(uniq_drugs)
