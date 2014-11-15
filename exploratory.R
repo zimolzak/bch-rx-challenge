@@ -50,4 +50,21 @@ joined = cbind(joined,delay_all)
 plot2 = ggplot(head(joined,n=10000), aes(x=DateWritten, y=delay))
 plot2 + geom_density2d() + geom_point()  + ylim(0, 150) + xlim(as.Date("2012-07-01"), as.Date("2013-12-31"))
 
-# qplot(data=joined, x=DateWritten, y=delay) # bad idea on 1E6 data points.
+plot3 = ggplot(head(joined,n=100000), aes(x=DateWritten, y=delay))
+plot3 + geom_density2d() + ylim(0, 150) + xlim(as.Date("2012-07-01"), as.Date("2013-12-31"))
+
+####
+
+pt_ndc_pairs = unique(joined[c("patientid", "DrugCodedProductCode")])
+pt_ndc_pairs$n = 1:dim(pt_ndc_pairs)[1]
+
+pt_n = unique(joined["patientid"])
+pt_n$pt_n = 1:dim(pt_n)[1]
+
+
+j_drugeras = merge(x=joined, y=pt_ndc_pairs, by = c("patientid", "DrugCodedProductCode"))
+
+j_drugeras = merge(x=j_drugeras, y=pt_n, by = "patientid")
+
+rect_plot = ggplot(head(j_drugeras, n=300), aes(xmin=n-0.5, xmax=n+0.5, ymin=FillDate, ymax=FillDate+DaySupply, alpha=0.5, color=as.factor(pt_n)))
+rect_plot + geom_rect() + coord_flip()  # + geom_hline(yintercept=365) + scale_y_continuous(breaks = seq(0, 390, 30), limits=c(0,390)) 
