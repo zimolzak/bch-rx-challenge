@@ -7,3 +7,8 @@ Medication_History_Records.txt
 *#
 *.png
 R_workspace
+.Rhistory
+.ipynb_checkpoints/
+Rplots.pdf
+_notebook/
+rxnorm

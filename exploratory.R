@@ -1,6 +1,6 @@
-DrugDetails = read.csv("~/Desktop/local/surescript-code/fixed_drug_details.csv", sep="|", quote="", colClasses=c("character", "integer", "character", "integer", "character", "character", "factor", "character", "numeric", "Date", "character", "factor", "numeric", "character", "factor", "integer", "Date", "character"))
+DrugDetails = read.csv("../fixed_drug_details.csv", sep="|", quote="", colClasses=c("character", "integer", "character", "integer", "character", "character", "factor", "character", "numeric", "Date", "character", "factor", "numeric", "character", "factor", "integer", "Date", "character"))
 
-MedicationHistoryRecords = read.csv("~/Desktop/local/surescript-code/Medication_History_Records.csv", sep=",", quote="", colClasses=c("character", "character", "integer", "character"))
+MedicationHistoryRecords = read.csv("../Medication_History_Records.csv", sep=",", quote="", colClasses=c("character", "character", "integer", "character"))
 
 joined = merge(x = DrugDetails, y = MedicationHistoryRecords, by = "messageid") # around a minute
 

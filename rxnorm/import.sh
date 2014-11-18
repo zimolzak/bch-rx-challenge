@@ -2,11 +2,6 @@
 
 #unzip rxnorm.zip
 
-cd prescribe/rrf
-
-sed "s/^\(.*\)|$/\1/" RXNREL.RRF   > RXNREL.RRF.sl
-sed "s/^\(.*\)|$/\1/" RXNCONSO.RRF   > RXNCONSO.RRF.sl
-sed "s/^\(.*\)|$/\1/" RXNSAT.RRF   > RXNSAT.RRF.sl
-
-sqlite3 ../../rxnorm.sqlite <  ../scripts/mysql/Table_scripts_mysql_rxn.sql
-sqlite3 ../../rxnorm.sqlite <  ../../import.sql
+git clone http://github.com/chb/py-umls && cd py-umls
+sh databases/rxnorm.sh  ..
+EXPORT_TYPE=csv DID_SOURCE_FOR_SETUP=did python2 rxnorm_link_run.py
