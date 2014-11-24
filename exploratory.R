@@ -85,7 +85,6 @@ my_NPI = sorted_npis$NPI[1]
 # "3d735541e2ac8521379b2b11d043ebf274bcfd3d" has <NA> dates
 # "7337ba41a39090a060a7b6b52dd3b256c4f4d370"
 
-
 my_data = joined[joined$NPI == my_NPI,]
 
 # dim(data_for_popular_doc)[1]
@@ -96,3 +95,22 @@ do_rectangle_plot(my_data)
 
 f = my_data[c( "FillDate", "DrugDescription", "DrugCodedStrength", "DaySupply", "DateWritten", "Directions", "QuantityValue")]
 f[order(f$FillDate, f$DrugDescription),]
+
+my_patients = unique(my_data$patientid)
+my_patients_data = joined[joined$patientid %in% my_patients,]
+my_patients_doctors = unique(my_patients_data$NPI)
+
+#### patient level analysis
+
+# FIXME - abstract this out.
+patients = head(joined, n=100000)
+patients = patients[order(patients$patientid),]
+common_patients_rle = rle(patients$patientid)
+common_patients = data.frame(patientid = common_patients_rle$values[order(common_patients_rle$lengths, decreasing=TRUE)], count = common_patients_rle$lengths[order(common_patients_rle$lengths, decreasing=TRUE)], stringsAsFactors=FALSE)
+my_patientid = common_patients$patientid[1] 
+
+my_data = joined[joined$patientid == my_patientid,]
+f = my_data[c( "FillDate", "DrugDescription", "DaySupply", "DateWritten", "DrugCodedProductCode", "messageid", "MessageDate")]
+head(f[order(f$FillDate, f$DrugDescription),], n=100) # Good example of duplicate drugs!
+
+# FIXME - MessageDate did not import properly as class Date.
