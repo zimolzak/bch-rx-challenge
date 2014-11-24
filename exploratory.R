@@ -73,12 +73,18 @@ do_rectangle_plot(head(joined, n=300))
 
 #### NPI (provider) level analysis
 
-sort_me_by_npi = head(joined, n=10000)
-sort_me_by_npi = sort_me_by_npi[sort_me_by_npi$NPI != "",] # 2161 non-blank out of 10000
+sort_me_by_npi = head(joined, n=100000)
+sort_me_by_npi = sort_me_by_npi[sort_me_by_npi$NPI != "" & ! is.na(sort_me_by_npi$FillDate),] # 2161 non-blank out of 10000
 sort_me_by_npi = sort_me_by_npi[order(sort_me_by_npi$NPI),]
 common_npis = rle(sort_me_by_npi$NPI)
 sorted_npis = data.frame(NPI = common_npis$values[order(common_npis$lengths, decreasing=TRUE)], count = common_npis$lengths[order(common_npis$lengths, decreasing=TRUE)], stringsAsFactors=FALSE)
-my_NPI = sorted_npis$NPI[1]
+my_NPI = sorted_npis$NPI[1] 
+
+# good npis:
+# "914e2abf389eea3e7aad540d8e1d0de31587d88d"
+# "3d735541e2ac8521379b2b11d043ebf274bcfd3d" has <NA> dates
+# "7337ba41a39090a060a7b6b52dd3b256c4f4d370"
+
 
 my_data = joined[joined$NPI == my_NPI,]
 
@@ -87,3 +93,6 @@ my_data = joined[joined$NPI == my_NPI,]
 # dim(data_for_popular_doc)[1] == sorted_npis$count[1]
 
 do_rectangle_plot(my_data)
+
+f = my_data[c( "FillDate", "DrugDescription", "DrugCodedStrength", "DaySupply", "DateWritten", "Directions", "QuantityValue")]
+f[order(f$FillDate, f$DrugDescription),]
