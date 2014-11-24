@@ -3,6 +3,21 @@ BCH Rx Challenge
 
 Purpose: Analysis of e-prescribing data.
 
+To-Do
+----
+
+* Synthesis. Link patients to drugs.
+
+* Analysis. Deduplicate, find gaps based on fill numbers, quantify
+gaps, analyze based on patients, based on set of providers, and so on.
+Goal is to deliver in ambulatory at POC. Put yourself in position of
+provider who's about to write a Rx. Help the Dr get to what matters in
+the med hx file. Regional analysis?
+
+* Visualization
+
+* Additional efforts. Any form of predictive power.
+
 Results
 ----
 
