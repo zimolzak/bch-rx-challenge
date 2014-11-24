@@ -50,21 +50,26 @@ plot2 + geom_density2d() + geom_point()  + ylim(0, 150) + xlim(as.Date("2012-07-
 
 plot3 = ggplot(head(joined,n=100000), aes(x=DateWritten, y=delay))
 plot3 + geom_density2d() + ylim(0, 150) + xlim(as.Date("2012-07-01"), as.Date("2013-12-31"))
-  # just zoomed in 2D density plot
+  # just a zoomed in 2D density plot
 
 #### rectangle plot for a few patients
 
-pt_ndc_pairs = unique(joined[c("patientid", "DrugCodedProductCode")])
-pt_ndc_pairs$n = 1:dim(pt_ndc_pairs)[1]
+do_rectangle_plot = function(drug_fill_data_frame) {
+	pt_ndc_pairs = unique(drug_fill_data_frame[c("patientid", "DrugCodedProductCode")])
+	pt_ndc_pairs$n = 1:dim(pt_ndc_pairs)[1]
 
-pt_n = unique(joined["patientid"])
-pt_n$pt_n = 1:dim(pt_n)[1]
+	pt_n = unique(drug_fill_data_frame["patientid"])
+	pt_n$pt_n = 1:dim(pt_n)[1]
 
-j_drugeras = merge(x=joined, y=pt_ndc_pairs, by = c("patientid", "DrugCodedProductCode"))
-j_drugeras = merge(x=j_drugeras, y=pt_n, by = "patientid")
+	j_drugeras = merge(x= drug_fill_data_frame, y=pt_ndc_pairs, by = c("patientid", "DrugCodedProductCode"))
+	j_drugeras = merge(x=j_drugeras, y=pt_n, by = "patientid")
 
-rect_plot = ggplot(head(j_drugeras, n=300), aes(xmin=n-0.5, xmax=n+0.5, ymin=FillDate, ymax=FillDate+DaySupply, alpha=0.5, color=as.factor(pt_n)))
-rect_plot + geom_rect() + coord_flip()  # + geom_hline(yintercept=365) + scale_y_continuous(breaks = seq(0, 390, 30), limits=c(0,390)) 
+	rect_plot = ggplot(j_drugeras, 
+		aes(xmin=n-0.5, xmax=n+0.5, ymin=FillDate, ymax=FillDate+DaySupply, alpha=0.5, color=as.factor(pt_n)))
+	rect_plot + geom_rect() + coord_flip() # + scale_y_discrete() #+ scale_y_continuous()
+}
+
+do_rectangle_plot(head(joined, n=300))
 
 #### NPI (provider) level analysis
 
@@ -73,8 +78,12 @@ sort_me_by_npi = sort_me_by_npi[sort_me_by_npi$NPI != "",] # 2161 non-blank out 
 sort_me_by_npi = sort_me_by_npi[order(sort_me_by_npi$NPI),]
 common_npis = rle(sort_me_by_npi$NPI)
 sorted_npis = data.frame(NPI = common_npis$values[order(common_npis$lengths, decreasing=TRUE)], count = common_npis$lengths[order(common_npis$lengths, decreasing=TRUE)], stringsAsFactors=FALSE)
-data_for_popular_doc = sort_me_by_npi[sort_me_by_npi$NPI == sorted_npis$NPI[1],]
+my_NPI = sorted_npis$NPI[1]
 
-dim(data_for_popular_doc)[1]
-sorted_npis$count[1]
-dim(data_for_popular_doc)[1] == sorted_npis$count[1]
+my_data = joined[joined$NPI == my_NPI,]
+
+# dim(data_for_popular_doc)[1]
+# sorted_npis$count[1]
+# dim(data_for_popular_doc)[1] == sorted_npis$count[1]
+
+do_rectangle_plot(my_data)
