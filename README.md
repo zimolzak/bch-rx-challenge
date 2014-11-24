@@ -3,20 +3,34 @@ BCH Rx Challenge
 
 Purpose: Analysis of e-prescribing data.
 
-To-Do
+Primary judging criteria
 ----
 
-* Synthesis. Link patients to drugs.
+1. Synthesis. Link patients to drugs. Are you flexible in accepting
+data that looks different (or bigger quantities)? Are you scaleable?
 
-* Analysis. Deduplicate, find gaps based on fill numbers, quantify
+2. Analysis. Deduplicate, find gaps based on fill numbers, quantify
 gaps, analyze based on patients, based on set of providers, and so on.
 Goal is to deliver in ambulatory at POC. Put yourself in position of
 provider who's about to write a Rx. Help the Dr get to what matters in
-the med hx file. Regional analysis?
+the med hx file. Judged based on: if you're rule-based, what are your
+rules like? Is your analysis broad? This judging is somewhat
+quantitative. Regional analysis? Extra credit for any form of
+predictive power.
 
-* Visualization
+3. Visualization. What audience can it hit? More qualitative criteria.
+Note that other audiences might include public health, ACOs, or
+anybody you can think of. Sounds like that's basically extra credit
+for such flexibility. Preference would be to have very polished
+product for 1 type of user, rather than a rough one for 3 users.
 
-* Additional efforts. Any form of predictive power.
+Our description of approach from proposal
+-------
+1. noninterruptive indicator of adherence on home screen
+
+2. click thru for screen of multiple meds with more details
+
+3. click thru for screen of a single med with highest detail
 
 Results
 ----
