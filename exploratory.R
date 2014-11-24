@@ -8,17 +8,14 @@ joined = joined[order(joined$patientid, joined$DrugCodedProductCode, joined$Fill
 
 #### elementary counts
 
-patient_list = unique(joined$patientid)
-length(patient_list) # 35190 patients
-drug_list = unique(joined$DrugCodedProductCode)
-length(drug_list) # 16015 NDCs
+length(unique(joined$patientid)) # 35190 patients
+length(unique(joined$DrugCodedProductCode)) # 16015 NDCs
 
 ##### find most frequently prescribed NDCs
 
 row.names(joined) = (1:dim(joined)[1])
 
 df_ndc = data.frame(ndc = joined$DrugCodedProductCode, stringsAsFactors=FALSE)
-
 ndc_bestsellers = rle(sort(df_ndc$ndc)) # 15 sec
 ndc_best_df = data.frame(count = unlist(ndc_bestsellers[1]), DrugCodedProductCode = unlist(ndc_bestsellers[2]))
 ndc_best_df = ndc_best_df[order(ndc_best_df$count, decreasing = TRUE),]
@@ -35,8 +32,7 @@ head(bestseller_w_names, n=100)
 #### elementary analyses on DrugDescription
 
 length(unique(uniq_drugs$DrugDescription)) # 9451; not all NDCs have unique descriptions
-
-head(unique(sort(uniq_drugs$DrugDescription)),n=100)
+head(unique(sort(uniq_drugs$DrugDescription)),n=100) # first few DrugDescriptions in alphabetical.
 
 #### elementary analysis on delay between date rx written and date rx filled.
 
@@ -72,3 +68,13 @@ rect_plot + geom_rect() + coord_flip()  # + geom_hline(yintercept=365) + scale_y
 
 #### NPI (provider) level analysis
 
+sort_me_by_npi = head(joined, n=10000)
+sort_me_by_npi = sort_me_by_npi[sort_me_by_npi$NPI != "",] # 2161 non-blank out of 10000
+sort_me_by_npi = sort_me_by_npi[order(sort_me_by_npi$NPI),]
+common_npis = rle(sort_me_by_npi$NPI)
+sorted_npis = data.frame(NPI = common_npis$values[order(common_npis$lengths, decreasing=TRUE)], count = common_npis$lengths[order(common_npis$lengths, decreasing=TRUE)], stringsAsFactors=FALSE)
+data_for_popular_doc = sort_me_by_npi[sort_me_by_npi$NPI == sorted_npis$NPI[1],]
+
+dim(data_for_popular_doc)[1]
+sorted_npis$count[1]
+dim(data_for_popular_doc)[1] == sorted_npis$count[1]
